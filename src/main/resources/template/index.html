@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skincare Store</title>
+    <!-- Reference to the external CSS file -->
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Welcome to Skincare Store</h1>
+
+    <!-- Login Form with class for styling -->
+    <div class="login">
+        <h2>Login</h2>
+        <input type="text" placeholder="Username">
+        <input type="password" placeholder="Password">
+        <button onclick="loginUser()">Login</button>
+    </div>
+
+    <!-- Product List Section -->
+    <div>
+        <h2>Products</h2>
+        <button onclick="fetchProducts()">Load Products</button>
+        <div id="product-list"></div>
+    </div>
+
+    <!-- Reference to external JavaScript file -->
+    <script src="/js/scripts.js"></script>
+</body>
+</html>

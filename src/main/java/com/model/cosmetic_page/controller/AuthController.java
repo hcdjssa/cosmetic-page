@@ -1,5 +1,7 @@
 package com.model.cosmetic_page.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,19 +14,24 @@ import com.model.cosmetic_page.entity.User;
 import com.model.cosmetic_page.service.UserService;
 
 @RestController
-@RequestMapping("/api/login")
-public class LoginController {
+@RequestMapping("/auth")
+public class AuthController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping
-    public ResponseEntity<?> loginUser(@RequestBody User user) {
-        User loggedInUser = userService.loginUser(user.getUsername(), user.getPassword());
-        if (loggedInUser != null) {
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody Map<String, String> loginData) {
+        User user = userService.findUserByUsername(loginData.get("username"));
+        if (user != null && user.getPassword().equals(loginData.get("password"))) {
             return ResponseEntity.ok("Login successful");
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
     }
-}
 
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody User user) {
+        User savedUser = userService.saveUser(user);
+        return ResponseEntity.ok(savedUser);
+    }
+}

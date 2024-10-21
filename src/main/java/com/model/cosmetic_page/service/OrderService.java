@@ -1,5 +1,6 @@
 package com.model.cosmetic_page.service;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,11 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
-    public List<Order> getOrdersForUser(Long userId) {
+    public List<Order> getOrdersByUser(Long userId) {
         return orderRepository.findByUserId(userId);
     }
-}
 
+    public Order createOrder(Order order) {
+        return orderRepository.save(order);
+    }
+}
